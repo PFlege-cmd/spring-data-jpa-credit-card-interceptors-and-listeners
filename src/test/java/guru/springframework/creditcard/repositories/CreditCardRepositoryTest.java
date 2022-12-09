@@ -12,8 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @ActiveProfiles(profiles = "local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -40,7 +38,7 @@ class CreditCardRepositoryTest {
         var savedCreditCard = creditCardRepository.saveAndFlush(creditCard);
         Map<String, Object> dbRow = jdbcTemplate.queryForMap("SELECT * FROM CREDIT_CARD WHERE ID = " + savedCreditCard.getId());
 
-        String encryptedCreditcardNumber = encryptionService.encrypt((String) dbRow.get("credit_card_number"));
+        String encryptedCreditcardNumber = (String) dbRow.get("credit_card_number");
 
         // Act
         var fetchedCreditCard = creditCardRepository.findById(savedCreditCard.getId()).orElseGet(() -> null);
