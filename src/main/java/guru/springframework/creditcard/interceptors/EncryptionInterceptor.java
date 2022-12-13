@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+//@Component
 public class EncryptionInterceptor extends EmptyInterceptor {
 
     public static final String ON_SAVE = "onSave";
